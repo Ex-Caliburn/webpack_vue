@@ -25,8 +25,8 @@
 <script>
   import headTop from '../../components/head/head'
   //    import alertTip from '../../components/common/alertTip'
-  //    import {localapi, proapi, imgBaseUrl} from 'src/config/env'
-  //    import {mapState, mapMutations} from 'vuex'
+  //      import {localapi, proapi, imgBaseUrl} from 'src/config/env'
+  import {mapState, mapMutations} from 'vuex'
   import {getMobileCode, sendLogin} from '../../service/getData'
 
   export default {
@@ -60,12 +60,10 @@
       }
     },
     methods: {
-//      success () {
-//        this.$Message.success('这是一条成功的提示');
-//      },
-//            ...mapMutations([
-//                'RECORD_USERINFO',
-//            ]),
+      ...mapMutations([
+        'SAVE_TOKEN',
+        'SAVE_USER_INFO',
+      ]),
       //改变登录方式
       changeLoginWay(){
         this.loginWay = !this.loginWay;
@@ -130,31 +128,17 @@
           console.log(err);
         }
         if (resp && resp.resp[0]) {
-          this.token = resp.resp[0].login_token && resp.resp[0].login_token.token;
-          if (resp.resp[0].user_info) {
-            var userInfo = {
-              "user_info": {
-                head_img_url: resp.resp[0].user_info.head_img_url,
-                nick_name: resp.resp[0].user_info.nick_name
-              }
-            };
-
+          if (resp.resp[0].login_token && resp.resp[0].login_token.token) {
+            this.token = resp.resp[0].login_token.token
+            this.SAVE_TOKEN(this.token);
           }
-
+          if (resp.resp[0].user_info) {
+            let head_img_url = resp.resp[0].user_info.head_img_url;
+            let nick_name = resp.resp[0].user_info.nick_name;
+            this.SAVE_USER_INFO({head_img_url, nick_name});
+          }
+          this.$router.push('/');
         }
-
-
-        //如果返回的值不正确，则弹出提示框，返回的值正确则返回上一页
-
-
-//        if (!this.userInfo.user_id) {
-//          this.showAlert = true;
-//          this.alertText = this.userInfo.message;
-//          if (!this.loginWay) this.getCaptchaCode();
-//        } else {
-//          this.RECORD_USERINFO(this.userInfo);
-//          this.$router.go(-1);
-//        }
       },
     },
     watch: {
@@ -174,21 +158,16 @@
 
   ::-webkit-input-placeholder {
     color: #dedede;
-    padding-left: 5px;
-    padding-bottom: 1px;
-    font-size: 13px;
-    line-height: 17px;
-  }
-
-  body {
-    font-size: 14px;
-    font-family: 'helvetica';
-    background: #eaeaea;
+    padding-left: .05rem;
+    padding-bottom: .01rem;
+    font-size: .13rem;
+    line-height: .17rem;
   }
 
   .login-number {
+    font-size: .14rem;
     background: #fff;
-    margin-bottom: 80px;
+    margin-bottom: .80rem;
   }
 
   input, button {
@@ -199,14 +178,14 @@
   }
 
   .num {
-    height: 46px;
-    line-height: 46px;
+    height: .46rem;
+    line-height: .46rem;
   }
 
   .num label {
     float: left;
-    width: 65px;
-    padding-left: 15px;
+    width: .65rem;
+    padding-left: .15rem;
   }
 
   .tel {
@@ -220,24 +199,24 @@
 
   .code {
     position: absolute;
-    width: 100px;
-    height: 30px;
-    line-height: 30px;
+    width: 1rem;
+    height: .30rem;
+    line-height: .30rem;
     text-align: center;
-    right: 15px;
+    right: .15rem;
     top: 50%;
-    margin-top: -15px;
-    border-radius: 5px;
+    margin-top: -.15rem;
+    border-radius: 0.05rem;
     color: #fff;
-    font-size: 12px;
+    font-size: .12rem;
     background: #e03731;
   }
 
   .login-btn {
     width: 90%;
-    height: 44px;
+    height: .44rem;
     margin: 0 auto;
-    border-radius: 8px;
+    border-radius: .8rem;
   }
 
   .sure-login-button {
@@ -246,9 +225,9 @@
     background: #e03731;
     color: #fff;
     text-align: center;
-    font-size: 14px;
+    font-size: .14rem;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: .8rem;
   }
 
   .btn-dis {

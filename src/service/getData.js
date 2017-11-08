@@ -1,5 +1,5 @@
 import fetch from '../config/fetch'
-import {getStore} from '../config/mUtils'
+import {storage} from '../config/mUtils'
 import Axios from 'axios'
 import {config, channel} from '../config/config'
 import  {app} from  '../main'
@@ -34,6 +34,7 @@ function commonResponseHandler(resp) {
       app.$Message.info({content: resp.msg});
       break;
     case 2011:
+    case 2012:
     case 2305:
       app.$Message.error({content: resp.msg});
       break;
@@ -464,7 +465,7 @@ export const exChangeHongbao = (id, exchange_code, captcha_code) => fetch('/v1/u
  * 获取用户信息
  */
 
-export const getUser = () => fetch('/v1/user', {user_id: getStore('user_id')});
+export const getUser = () => fetch('/v1/user', {user_id: storage.getLocal('user_id')});
 
 
 /**

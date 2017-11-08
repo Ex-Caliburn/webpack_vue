@@ -1,5 +1,13 @@
-export const SAVE_TOkEN = 'SAVE_TOkEN'
+export const SAVE_TOKEN = 'SAVE_TOKEN'
 export const SAVE_USER_INFO = 'SAVE_USER_INFO'
+
+
+//demo
+export const ADD_COUNT = 'ADD_COUNT'
+export const ADD_COUNT_BY = 'ADD_COUNT_BY'
+
+
+
 
 
 export const RECORD_ADDRESS = 'RECORD_ADDRESS'

@@ -29,7 +29,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/get_api_post_data/': {
-        target: 'http://localhost:8888/',
+        // target: 'http://localhost:8888/',
+        target: 'http://localhost:3000/',
         changeOrigin: true,
       }
     },

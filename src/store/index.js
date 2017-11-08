@@ -12,9 +12,18 @@ const state = {
   // cartList: {}, // 加入购物车的商品列表
   // shopDetail: null, //商家详情信息
   token: null,
-  userInfo: null, //用户信息
+  userInfo: {}, //用户信息
   login: true,//是否登录
   imgPath: null,//头像地址
+  count: 0,
+  countBy: 0,
+
+  todos: [
+    {id: 1, text: '...', done: true},
+    {id: 2, text: '...', done: true},
+    {id: 3, text: '...', done: true},
+    {id: 4, text: '...', done: false}
+  ]
 
   // shopid: null,//商铺id
   // remarkText: null,//可选备注内容
@@ -42,4 +51,6 @@ export default new Vuex.Store({
   getters,
   actions,
   mutations,
+  // 在严格模式下，无论何时发生了状态变更且不是由 mutation 函数引起的，将会抛出错误。这能保证所有的状态变更都能被调试工具跟踪到。
+  // strict: true
 })

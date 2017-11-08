@@ -3,22 +3,41 @@ import {
   getAddressList
 } from '../service/getData'
 import {
-  SAVE_TOkEN,
-  SAVE_USER_INFO,
-
-  GET_USERINFO,
-  SAVE_ADDRESS
+  ADD_COUNT,
+  ADD_COUNT_BY,
+  // GET_USERINFO,
+  SAVE_ADDRESS,
 } from './mutation-types.js'
 
 export default {
 
-  async getUserInfo({
+  async countAdd({
     commit,
     state
   }) {
-    let res = await getUser();
-    commit(GET_USERINFO, res)
+    let i = 0;
+    setInterval(function () {
+      commit(ADD_COUNT, ++i)
+    }, 600)
   },
+  async countAddBy({
+    commit,
+    state,
+  }, count) {
+    // console.log(init);
+    let i = count;
+    setInterval(function () {
+      commit(ADD_COUNT_BY, ++i)
+    }, 600)
+  },
+
+  // async getUserInfo({
+  //   commit,
+  //   state
+  // }) {
+  //   let res = await getUser();
+  //   commit(GET_USERINFO, res)
+  // },
   async saveAddress({
     commit,
     state

@@ -1,29 +1,75 @@
 /**
  * 存储localStorage
  */
-export const setStore = (name, content) => {
-  if (!name) return;
-  if (typeof content !== 'string') {
-    content = JSON.stringify(content);
+
+function Storage() {
+}
+
+Storage.prototype = {
+  setLocal: function set(key, value) {
+    //必须转换为json放在localStorage存储里，不然不方便读取
+    if (typeof value === 'object') {
+      value = JSON.stringify(value);
+    }
+    localStorage.setItem(key, value);
+  },
+  getLocal: function get(key) {
+    var value = localStorage.getItem(key);
+    //将json对象，数组进行处理
+    if (value !== null && (value.indexOf('{') === 0 || value.indexOf('[') === 0)) {
+      value = JSON.parse(value);
+    }
+    return value
+  },
+  removeLocal: function remove(key) {
+    localStorage.removeItem(key);
+  },
+  setSession: function set(key, value) {
+    //必须转换为json放在localStorage存储里，不然不方便读取
+    if (typeof value === 'object') {
+      var value = JSON.stringify(value);
+    }
+    sessionStorage.setItem(key, value);
+
+  },
+  getSession: function get(key) {
+    var value = sessionStorage.getItem(key);
+    //将json对象，数组进行处理
+    if (value !== null && (value.indexOf('{') === 0 || value.indexOf('[') === 0)) {
+      value = JSON.parse(value);
+    }
+    return value
+  },
+  removeSession: function remove(key) {
+    sessionStorage.removeItem(key);
   }
-  window.localStorage.setItem(name, content);
 }
 
-/**
- * 获取localStorage
- */
-export const getStore = name => {
-  if (!name) return;
-  return window.localStorage.getItem(name);
-}
+export const storage = new Storage();
 
-/**
- * 删除localStorage
- */
-export const removeStore = name => {
-  if (!name) return;
-  window.localStorage.removeItem(name);
-}
+// export const setStore = (name, content) => {
+//   if (!name) return;
+//   if (typeof content !== 'string') {
+//     content = JSON.stringify(content);
+//   }
+//   window.localStorage.setItem(name, content);
+// }
+//
+// /**
+//  * 获取localStorage
+//  */
+// export const getStore = name => {
+//   if (!name) return;
+//   return window.localStorage.getItem(name);
+// }
+//
+// /**
+//  * 删除localStorage
+//  */
+// export const removeStore = name => {
+//   if (!name) return;
+//   window.localStorage.removeItem(name);
+// }
 
 /**
  * 获取style样式
