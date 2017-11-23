@@ -2,7 +2,7 @@
   <div>
     <head-top headTitle='首页'></head-top>
     <div v-text="token">1111</div>
-    <div v-text="userInfo && userInfo.nick_name">1111</div>
+    <div v-text="userInfo && userInfo.nick_name" ref="item" @click="alert" aa="bbb">1111</div>
     <img :src="userInfo && userInfo.head_img_url ">
     <back-top></back-top>
 
@@ -115,6 +115,9 @@
       //点击图标刷新页面
       reload(){
         window.location.reload();
+      },
+      alert(){
+        console.log(this.$refs.item.getAttribute('aa'));
       }
     },
   }

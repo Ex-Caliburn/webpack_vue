@@ -8,6 +8,8 @@ import router from './router'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';    // 使用 CSS
 
+// import  {createSign,createVerify} from './config/encode'
+
 // import MintUI from 'mint-ui'
 import {Button, Cell} from 'mint-ui'
 import 'mint-ui/lib/style.css'
